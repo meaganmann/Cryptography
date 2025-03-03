@@ -1,0 +1,248 @@
+import java.nio.file.FileSystems;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class Lab3 {
+
+	/**
+	 * The uppercase characters of the regular English alphabet.
+	 */
+	public static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	/**
+	 * The number of characters in the regular English alphabet.
+	 */
+	public static final int ALPHABET_LEN = ALPHABET.length();
+
+	/**
+	 * Returns a list containing the characters of string s (in the same order that
+	 * the characters appear in s).
+	 * 
+	 * @param s a string
+	 * @return a list containing the characters of string
+	 */
+	public static ArrayList<Character> toList(String s) {
+		
+        ArrayList<Character> charList = new ArrayList<>();
+        
+        for (char chars : s.toCharArray()) {
+            charList.add(chars);
+        }
+        return charList;
+		
+	}
+
+	/**
+	 * Returns a string formed by concatenating together successive characters in a
+	 * list starting from the first character.
+	 * 
+	 * @param t a list
+	 * @return a string formed by concatenating together successive characters in t
+	 */
+	public static String fromList(ArrayList<Character> t) {
+
+		String newString = new String();
+		
+		for (char i = 0; i < t.size(); i++) {
+			
+			newString = newString + t.get(i);
+		}
+		
+		return newString;
+		
+	}
+
+	/**
+	 * Returns a new string formed by randomly shuffling the characters of a string.
+	 * All permutations occur with approximately equal likelihood.
+	 * 
+	 * @param s a string
+	 * @return a new string formed by randomly shuffling the characters of s
+	 */
+	public static String shuffle(String s) {
+		
+		ArrayList<Character> t = new ArrayList<>();
+		String newString = new String();
+		
+		t = Lab3.toList(s);
+		
+		int j;
+		
+		Random rand = new Random();
+		
+		int n = s.length();
+		for (int i = n - 1; i > 0; i--) {
+			j = rand.nextInt(i + 1);
+			char temp = t.get(i);
+			t.set(i, t.get(j));
+			t.set(j, temp);
+		}
+		newString = Lab3.fromList(t);
+		return newString;
+		
+	}
+
+	/**
+	 * Encrypts a message written using the regular alphabet by replacing each
+	 * character of the message with the corresponding character in a cipher
+	 * alphabet. Characters in the message which have no corresponding character in
+	 * the cipher alphabet are replaced with a '?' character.
+	 * 
+	 * @param msg            a plain-text message
+	 * @param cipherAlphabet a cipher alphabet
+	 * @return the message encrypted using the cipher alphabet
+	 */
+	public static String encrypt(String msg, String cipherAlphabet) {
+		
+		ArrayList<Character> newList = new ArrayList<>();
+		String newString = new String();
+		
+		for(int i = 0; i < msg.length(); i++) {
+			char c = msg.charAt(i);
+			int index = ALPHABET.indexOf(c);
+			
+			if(index == -1) {
+				newList.add('?');
+			} else {
+				newList.add(cipherAlphabet.charAt(index));
+			}
+		}
+		
+		newString = Lab3.fromList(newList);
+		return newString;
+	}
+
+	/**
+	 * Decrypts a message written using a cipher alphabet by replacing each
+	 * character of the message with the corresponding character in the regular
+	 * alphabet. Characters in the message which have no corresponding character in
+	 * the regular alphabet are replaced with a '?' character.
+	 * 
+	 * @param msg            an encrypted message
+	 * @param cipherAlphabet the cipher alphabet used to encrypt the original
+	 *                       message
+	 * @return the decrypted message
+	 */
+	public static String decrypt(String msg, String cipherAlphabet) {
+		
+		ArrayList<Character> newList = new ArrayList<>();
+		String newString = new String();
+		
+		for(int i = 0; i < msg.length(); i++) {
+			char c = msg.charAt(i);
+			int index = cipherAlphabet.indexOf(c);
+			
+			if(index == -1) {
+				newList.add('?');
+			} else {
+				newList.add(ALPHABET.charAt(index));
+			}
+		}
+		
+		newString = Lab3.fromList(newList);
+		return newString;
+		
+		
+		
+	}
+
+	/**
+	 * Reads a file returning the text of the file as a single string. The file must
+	 * be in the directory named text in the eclipse project.
+	 * 
+	 * <p>
+	 * For multiline files, all of the lines are concatenated together and a single
+	 * string is returned.
+	 * 
+	 * @param filename filename of a file to read
+	 * @return the string containing the text of the file
+	 */
+	public static String read(String filename) {
+		try {
+			Path path = FileSystems.getDefault().getPath("text", filename);
+			List<String> lines = Files.readAllLines(path);
+			// your code starts here
+			
+			Files.readString(path);
+			
+			String newString = new String();
+			
+			for (int i = 0; i < lines.size(); i++) {
+				String line = lines.get(i);
+				newString = newString + line;
+			}
+			
+			return newString.toUpperCase();
+			// your code ends
+
+		} catch (Exception ex) {
+			// some sort of error occurred while reading the file
+			ex.printStackTrace();
+			System.exit(1);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the list of strings formed by repeatedly splitting a string into
+	 * substrings of a specified length len. Each string in the returned list has
+	 * length len except possibly the last which is non-empty but may be shorter
+	 * than len (unless len is 1).
+	 * 
+	 * @param s a string
+	 * @return a list of strings formed by repeatedly splitting a string into
+	 *         substrings of a specified length
+	 * @throws IllegalArugmentException if len is less than 1
+	 */
+	public static ArrayList<String> toList(String s, int len) {
+	
+		ArrayList<String> newList = new ArrayList<>();
+		
+		String subString = new String();
+		
+		for (int i = 0; i < s.length(); i = i + len) {
+			if(i + len <= s.length()) {
+				subString = s.substring(i, i + len);
+				newList.add(subString);
+			} else {
+				subString = s.substring(i, s.length());
+				newList.add(subString);
+				
+			}
+			
+		}
+			
+		return newList;
+		
+	}
+
+	/**
+	 * Decrypts an encrypted message by using all of the cipher alphabets provided
+	 * in the list ciphers. Each element of the returned list corresponds to the
+	 * message decrypted using the corresponding cipher alphabet in ciphers.
+	 * 
+	 * @param msg an encrypted message
+	 * @return a list of candidate decrypted messages, each message decrypted using
+	 *         a cipher alphabet in ciphers
+	 */
+	public static ArrayList<String> decryptBruteForce(String msg, ArrayList<String> ciphers) {
+		
+		ArrayList<String> newList = new ArrayList<>();
+		
+		for(int i = 0; i < ciphers.size(); i++) {
+			String cipher = ciphers.get(i);
+			String decrypt = Lab3.decrypt(msg, cipher);
+			newList.add(decrypt);
+			newList.add("");
+			
+		}
+		
+		return newList;
+		
+	}
+
+}
