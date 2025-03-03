@@ -1,0 +1,24 @@
+import java.util.ArrayList;
+import ciphers.txt;
+
+public class TestDecryptBruteForce {
+
+	public static void main(String[] args) {
+
+		String ciphers = Lab3.read("ciphers.txt");
+		
+		ArrayList<String> listCiphers = new ArrayList<>();
+		listCiphers = Lab3.toList(ciphers, 26);
+		
+		
+		String encryptedMsg = Lab3.read("enc3.txt");
+		ArrayList<String> decryptedMsg = new ArrayList<>();
+		
+		decryptedMsg = Lab3.decryptBruteForce(encryptedMsg, listCiphers);
+
+		System.out.println(decryptedMsg);
+		
+		
+		
+	}
+}
