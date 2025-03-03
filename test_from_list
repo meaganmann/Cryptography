@@ -1,0 +1,19 @@
+import java.util.ArrayList;
+
+public class TestToFromList {
+
+	public static void main(String[] args) {
+		
+		String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		
+		ArrayList<Character> list = new ArrayList<>();
+		String string = new String();
+		
+		list = Lab3.toList(s);
+		System.out.println(list);
+		
+		string = Lab3.fromList(list);
+		System.out.println(string);
+		
+	}
+}
