@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class TestShuffle {
+
+	public static void main(String[] args) {
+		
+		String s =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		
+		String newString1 = new String();
+		newString1 = Lab3.shuffle(s);
+		System.out.println(newString1);
+		
+		String newString2 = new String();
+		newString2 = Lab3.shuffle(s);
+		System.out.println(newString2);
+		
+		String newString3 = new String();
+		newString3 = Lab3.shuffle(s);
+		System.out.println(newString3);
+		
+		String newString4 = new String();
+		newString4 = Lab3.shuffle(s);
+		System.out.println(newString4);
+		
+		String newString5 = new String();
+		newString5 = Lab3.shuffle(s);
+		System.out.println(newString5);
+		
+		String newString6 = new String();
+		newString6 = Lab3.shuffle(s);
+		System.out.println(newString6);
+		
+		String newString7 = new String();
+		newString7 = Lab3.shuffle(s);
+		System.out.println(newString7);
+		
+		String newString8 = new String();
+		newString8 = Lab3.shuffle(s);
+		System.out.println(newString8);
+		
+		String newString9 = new String();
+		newString9 = Lab3.shuffle(s);
+		System.out.println(newString9);
+		
+		String newString10 = new String();
+		newString10 = Lab3.shuffle(s);
+		System.out.println(newString10);
+		
+		
+		
+	}
+
+}
